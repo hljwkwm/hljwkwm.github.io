@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="使用 Matplotlib 绘制 2D 和 3D 图形实验介绍 在使用机器学习方法解决问题的过程中，一定会遇到需要针对数据进行绘图的场景。Matplotlib 是支持 Python 语言的开源绘图库，因为其支持丰富的绘图类型、简单的绘图方式以及完善的接口文档，深受 Python 工程师、科研学者、数据工程师等各类人士的喜欢。Matplotlib 拥有着十分活跃的社区以及稳定的版本迭代，当我们在学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Matplotlib绘制2D和3D图形">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/index.html">
+<meta property="og:site_name" content="Crazy丿紫流">
+<meta property="og:description" content="使用 Matplotlib 绘制 2D 和 3D 图形实验介绍 在使用机器学习方法解决问题的过程中，一定会遇到需要针对数据进行绘图的场景。Matplotlib 是支持 Python 语言的开源绘图库，因为其支持丰富的绘图类型、简单的绘图方式以及完善的接口文档，深受 Python 工程师、科研学者、数据工程师等各类人士的喜欢。Matplotlib 拥有着十分活跃的社区以及稳定的版本迭代，当我们在学习">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/document-uid214893labid7506timestamp1534942536511-1547790895298.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547794834487.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547794927143.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795016373.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/document-uid214893labid7506timestamp1543470230951.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795238822.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795273491.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795334049.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795409043.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795475184.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795558122.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795625951.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795665876.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795728252.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795784141.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795815795.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795863968.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795915187.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547795963678.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/1547796022339.png">
+<meta property="og:updated_time" content="2019-05-22T07:26:36.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Matplotlib绘制2D和3D图形">
+<meta name="twitter:description" content="使用 Matplotlib 绘制 2D 和 3D 图形实验介绍 在使用机器学习方法解决问题的过程中，一定会遇到需要针对数据进行绘图的场景。Matplotlib 是支持 Python 语言的开源绘图库，因为其支持丰富的绘图类型、简单的绘图方式以及完善的接口文档，深受 Python 工程师、科研学者、数据工程师等各类人士的喜欢。Matplotlib 拥有着十分活跃的社区以及稳定的版本迭代，当我们在学习">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/images/document-uid214893labid7506timestamp1534942536511-1547790895298.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>使用Matplotlib绘制2D和3D图形 | Crazy丿紫流</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Crazy丿紫流</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个专注于水文章的博客。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">1</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>时间线<span class="badge">3</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于我</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/使用Matplotlib绘制2D和3D图形/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ziliu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crazy丿紫流">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Matplotlib绘制2D和3D图形
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-22 15:25:00 / 修改时间：15:26:36" itemprop="dateCreated datePublished" datetime="2019-05-22T15:25:00+08:00">2019-05-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python学习/" itemprop="url" rel="index"><span itemprop="name">Python学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="使用-Matplotlib-绘制-2D-和-3D-图形"><a href="#使用-Matplotlib-绘制-2D-和-3D-图形" class="headerlink" title="使用 Matplotlib 绘制 2D 和 3D 图形"></a><font color="brown">使用 Matplotlib 绘制 2D 和 3D 图形</font></h1><h2 id="实验介绍"><a href="#实验介绍" class="headerlink" title="实验介绍"></a>实验介绍</h2><p><img src="images/document-uid214893labid7506timestamp1534942536511-1547790895298.png" alt="此处输入图片的描述"></p>
+<p>在使用机器学习方法解决问题的过程中，一定会遇到需要针对数据进行绘图的场景。Matplotlib 是支持 Python 语言的开源绘图库，因为其支持丰富的绘图类型、简单的绘图方式以及完善的接口文档，深受 Python 工程师、科研学者、数据工程师等各类人士的喜欢。Matplotlib 拥有着十分活跃的社区以及稳定的版本迭代，当我们在学习机器学习的课程时，掌握 Matplotlib 的使用无疑是最重要的准备工作之一。本次实验课程中，我们将学会使用 Matplotlib 绘制 2D 和 3D 图形的方法和技巧。</p>
+<h3 id="实验知识点"><a href="#实验知识点" class="headerlink" title="实验知识点"></a>实验知识点</h3><p>本次实验涉及的知识点主要有：</p>
+<ul>
+<li>兼容 MATLAB 代码风格 API</li>
+<li>图名称、坐标轴名称、图例</li>
+<li>线型、颜色、透明度</li>
+<li>画布网格、坐标轴范围</li>
+<li>其他 2D 图形</li>
+<li>3D 图形</li>
+</ul>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><ul>
+<li>Python 3.6</li>
+<li>Matplotlab: 2.2.2</li>
+</ul>
+<h3 id="索引目录"><a href="#索引目录" class="headerlink" title="索引目录"></a>索引目录</h3><ul>
+<li><a href="#1">1. 兼容 MATLAB 代码风格 API</a></li>
+<li><a href="#2">2. Matplotlib 面向对象 API（推荐）</a></li>
+<li><a href="#3">3. 实验总结</a></li>
+</ul>
+<hr>
+<p>在使用 Notebook 环境绘图时，需要先运行 %matplotlib inline 命令。这条命令的作用是将 matplotlib 绘制的图形嵌入在当前页面中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<h2 id="1-兼容-MATLAB-代码风格-API"><a href="#1-兼容-MATLAB-代码风格-API" class="headerlink" title="1. 兼容 MATLAB 代码风格 API"></a><a id="1">1. 兼容 MATLAB 代码风格 API</a></h2><p>相信很多学理工科的同学都使用过 MATLAB，它是一种用于算法开发、数据可视化、数据分析以及数值计算的高级技术计算语言和交互式环境。而在 Matplotlib 中，也提供了和 MATLAB 相似的 API。对于使用过 MATLAB 的同学而言，这将是入门 Matplotlib 最快的方式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""使用 matplotlib 提供的兼容 MATLAB API，需要导入 pylab 模块</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pylab</span><br><span class="line"></span><br><span class="line"><span class="string">"""使用 NumPy 生成随机数据</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">y = x * x + <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""只需要 1 句命令就可以完成绘图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">pylab.plot(x, y, <span class="string">'r'</span>) <span class="comment"># 'r' 代表 red</span></span><br></pre></td></tr></table></figure>
+<p><img src="images/1547794834487.png" alt="1547794834487"></p>
+<p>如果我们要绘制子图，就可以使用<code>subplot</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制子图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">pylab.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>) <span class="comment"># 括号中内容代表（行，列，索引）</span></span><br><span class="line">pylab.plot(x, y, <span class="string">'r--'</span>) <span class="comment"># ‘’ 中的内容确定了颜色和线型</span></span><br><span class="line"></span><br><span class="line">pylab.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">pylab.plot(y, x, <span class="string">'g*-'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547794927143.png" alt="1547794927143"></p>
+<p>使用兼容 MATLAB 风格的 API 的好处在于，如果熟悉 MATLAB，那么将很快上手使用 Python 绘图。不过，除了一些简单的图形之外，并不鼓励使用兼容MATLAB 的 API。</p>
+<p>于此同时，实验更加建议学习和使用 Matplotlib 提供的面向对象 API，它更加强大和好用。</p>
+<h2 id="2-Matplotlib-面向对象-API（推荐）"><a href="#2-Matplotlib-面向对象-API（推荐）" class="headerlink" title="2. Matplotlib 面向对象 API（推荐）"></a><a id="1">2. Matplotlib 面向对象 API（推荐）</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""使用 matplotlib 提供的面向对象 API，需要导入 pyplot 模块，并约定简称为 plt</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""方法 1：绘制上方一致的图形</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig = plt.figure() <span class="comment"># 新建图形对象</span></span><br><span class="line"></span><br><span class="line">axes = fig.add_axes([<span class="number">0.5</span>, <span class="number">0.1</span>, <span class="number">0.8</span>, <span class="number">0.8</span>]) <span class="comment"># 控制画布的左, 下, 宽度, 高度 (从 0 到 1)</span></span><br><span class="line"></span><br><span class="line">axes.plot(x, y, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795016373.png" alt="1547795016373"></p>
+<p><font color="brown"><strong>重点：</strong></font>上面的绘图代码中，你可能会对 <code>figure</code> 和 <code>axes</code> 产生疑问。Matplotlib 的 API 设计的非常符合常理，在这里，<code>figure</code> 相当于绘画用的画板，而 <code>axes</code> 则相当于铺在画板上的画布。我们将图像绘制在画布上，于是就有了 <code>plot</code>，<code>set_xlabel</code> 等操作。</p>
+<p><img src="images/document-uid214893labid7506timestamp1543470230951.png" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""同样，我们可以绘制子图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">2</span>) <span class="comment"># 子图为 1 行，2 列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> axes:</span><br><span class="line">    ax.plot(x, y, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795238822.png" alt="1547795238822"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""还能将一张图绘制在另一张图的内部</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig = plt.figure() <span class="comment"># 新建画板</span></span><br><span class="line"></span><br><span class="line">axes1 = fig.add_axes([<span class="number">0.1</span>, <span class="number">0.1</span>, <span class="number">0.8</span>, <span class="number">0.8</span>]) <span class="comment"># 大画布</span></span><br><span class="line">axes2 = fig.add_axes([<span class="number">0.2</span>, <span class="number">0.5</span>, <span class="number">0.4</span>, <span class="number">0.3</span>]) <span class="comment"># 小画布</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 大画布</span></span><br><span class="line">axes1.plot(x, y, <span class="string">'r'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小画布</span></span><br><span class="line">axes2.plot(y, x, <span class="string">'g'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795273491.png" alt="1547795273491"></p>
+<p><font color="brown"><strong>Tips：</strong></font>上面的绘图代码中，你可能学会了使用 <code>add_axes()</code> 方法向我们设置的画板 <code>figure</code> 中添加画布 <code>axes</code>。在 Matplotlib 中，还有一种添加画布的方式，那就是<code>plt.subplots()</code>，<strong>它和 <code>axes</code> 都等同于画布</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""方法 2：使用 plt.subplots() 添加画布</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots()</span><br><span class="line"></span><br><span class="line">axes.plot(x, y, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795334049.png" alt="1547795334049"></p>
+<p>Matplotlib 绘图非常灵活，我们还可以使用 <code>add_subplot</code> 添加画布，使用 <code>plt</code> 完成绘图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""方法 3：使用 add_subplot() 添加画布</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig = plt.figure() <span class="comment"># 新建图形对象</span></span><br><span class="line"></span><br><span class="line">fig.add_subplot()</span><br><span class="line"></span><br><span class="line">plt.plot(x, y, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795409043.png" alt="1547795409043"></p>
+<p>对于上面提到的 3 种添加画布的方法，你可能觉得有些杂乱。一般情况下，只需要熟悉其中的一种即可，这里比较推荐使用 <code>plt.subplots()</code>，而下面的许多例子也将采用这种方式展开。</p>
+<p>另外，既然我们拥有了画板和画布，我们应该也可以调整二者的尺寸，形状吧？当然！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""调节画布尺寸和显示精度</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots(figsize=(<span class="number">16</span>,<span class="number">9</span>), dpi=<span class="number">50</span>) <span class="comment"># 通过 figsize 调节尺寸, dpi 调节显示精度</span></span><br><span class="line"></span><br><span class="line">axes.plot(x, y, <span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795475184.png" alt="1547795475184"></p>
+<h3 id="2-1-图名称、坐标轴名称、图例"><a href="#2-1-图名称、坐标轴名称、图例" class="headerlink" title="2.1 图名称、坐标轴名称、图例"></a>2.1 图名称、坐标轴名称、图例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""设置图标题</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">ax.set_title(<span class="string">"title"</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"""设置坐标轴名称</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">ax.set_xlabel(<span class="string">"x"</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">"y"</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"""设置图例</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">ax.legend([<span class="string">"label1"</span>, <span class="string">"label2"</span>])</span><br></pre></td></tr></table></figure>
+<p>举例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制包含图标题、坐标轴标题以及图例的图形</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots()</span><br><span class="line"></span><br><span class="line">axes.set_xlabel(<span class="string">'x label'</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">'y label'</span>)</span><br><span class="line">axes.set_title(<span class="string">'title'</span>)</span><br><span class="line"></span><br><span class="line">axes.plot(x, x**<span class="number">2</span>)</span><br><span class="line">axes.plot(x, x**<span class="number">3</span>)</span><br><span class="line">axes.legend([<span class="string">"y = x**2"</span>, <span class="string">"y = x**3"</span>], loc=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795558122.png" alt="1547795558122"></p>
+<p>图例中的 <code>loc</code> 参数标记图例位置，<code>1，2，3，4</code> 依次代表：右上角、左上角、左下角，右下角；<code>0</code> 代表自适应。</p>
+<h3 id="2-2-线型、颜色、透明度"><a href="#2-2-线型、颜色、透明度" class="headerlink" title="2.2 线型、颜色、透明度"></a>2.2 线型、颜色、透明度</h3><p>在 Matplotlib 中，你可以设置线的颜色、透明度等其他属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""设置线的颜色、透明度</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots()</span><br><span class="line"></span><br><span class="line">axes.plot(x, x+<span class="number">1</span>, color=<span class="string">"red"</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">axes.plot(x, x+<span class="number">2</span>, color=<span class="string">"#1155dd"</span>)</span><br><span class="line">axes.plot(x, x+<span class="number">3</span>, color=<span class="string">"#15cc55"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795625951.png" alt="1547795625951"></p>
+<p>而对于线型而言，除了实线、虚线之外，还有很多丰富的线型可供选择。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""设置线型</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 线宽</span></span><br><span class="line">ax.plot(x, x+<span class="number">1</span>, color=<span class="string">"blue"</span>, linewidth=<span class="number">0.25</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">2</span>, color=<span class="string">"blue"</span>, linewidth=<span class="number">0.50</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">3</span>, color=<span class="string">"blue"</span>, linewidth=<span class="number">1.00</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">4</span>, color=<span class="string">"blue"</span>, linewidth=<span class="number">2.00</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚线类型</span></span><br><span class="line">ax.plot(x, x+<span class="number">5</span>, color=<span class="string">"red"</span>, lw=<span class="number">2</span>, linestyle=<span class="string">'-'</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">6</span>, color=<span class="string">"red"</span>, lw=<span class="number">2</span>, ls=<span class="string">'-.'</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">7</span>, color=<span class="string">"red"</span>, lw=<span class="number">2</span>, ls=<span class="string">':'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚线交错宽度</span></span><br><span class="line">line, = ax.plot(x, x+<span class="number">8</span>, color=<span class="string">"black"</span>, lw=<span class="number">1.50</span>)</span><br><span class="line">line.set_dashes([<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 符号</span></span><br><span class="line">ax.plot(x, x+ <span class="number">9</span>, color=<span class="string">"green"</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>, marker=<span class="string">'+'</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">10</span>, color=<span class="string">"green"</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>, marker=<span class="string">'o'</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">11</span>, color=<span class="string">"green"</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>, marker=<span class="string">'s'</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">12</span>, color=<span class="string">"green"</span>, lw=<span class="number">2</span>, ls=<span class="string">'--'</span>, marker=<span class="string">'1'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 符号大小和颜色</span></span><br><span class="line">ax.plot(x, x+<span class="number">13</span>, color=<span class="string">"purple"</span>, lw=<span class="number">1</span>, ls=<span class="string">'-'</span>, marker=<span class="string">'o'</span>, markersize=<span class="number">2</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">14</span>, color=<span class="string">"purple"</span>, lw=<span class="number">1</span>, ls=<span class="string">'-'</span>, marker=<span class="string">'o'</span>, markersize=<span class="number">4</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">15</span>, color=<span class="string">"purple"</span>, lw=<span class="number">1</span>, ls=<span class="string">'-'</span>, marker=<span class="string">'o'</span>, markersize=<span class="number">8</span>, markerfacecolor=<span class="string">"red"</span>)</span><br><span class="line">ax.plot(x, x+<span class="number">16</span>, color=<span class="string">"purple"</span>, lw=<span class="number">1</span>, ls=<span class="string">'-'</span>, marker=<span class="string">'s'</span>, markersize=<span class="number">8</span>, </span><br><span class="line">        markerfacecolor=<span class="string">"yellow"</span>, markeredgewidth=<span class="number">2</span>, markeredgecolor=<span class="string">"blue"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795665876.png" alt="1547795665876"></p>
+<h3 id="2-3-画布网格、坐标轴范围"><a href="#2-3-画布网格、坐标轴范围" class="headerlink" title="2.3 画布网格、坐标轴范围"></a>2.3 画布网格、坐标轴范围</h3><p>有些时候，我们可能需要显示画布网格或调整坐标轴范围。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""设置画布网格和坐标轴范围</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示网格</span></span><br><span class="line">axes[<span class="number">0</span>].plot(x, x**<span class="number">2</span>, x, x**<span class="number">3</span>, lw=<span class="number">2</span>)</span><br><span class="line">axes[<span class="number">0</span>].grid(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置坐标轴范围</span></span><br><span class="line">axes[<span class="number">1</span>].plot(x, x**<span class="number">2</span>, x, x**<span class="number">3</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_ylim([<span class="number">0</span>, <span class="number">60</span>])</span><br><span class="line">axes[<span class="number">1</span>].set_xlim([<span class="number">2</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795728252.png" alt="1547795728252"></p>
+<h3 id="2-4-其他-2D-图形"><a href="#2-4-其他-2D-图形" class="headerlink" title="2.4 其他 2D 图形"></a>2.4 其他 2D 图形</h3><p>除了线型图，Matplotlib 还支持绘制散点图、柱状图等其他常见图形。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制散点图、梯步图、条形图、面积图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">n = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">4</span>, figsize=(<span class="number">16</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].scatter(x, x + <span class="number">0.25</span>*np.random.randn(len(x)))</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">"scatter"</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">1</span>].step(n, n**<span class="number">2</span>, lw=<span class="number">2</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">"step"</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">2</span>].bar(n, n**<span class="number">2</span>, align=<span class="string">"center"</span>, width=<span class="number">0.5</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">axes[<span class="number">2</span>].set_title(<span class="string">"bar"</span>)</span><br><span class="line"></span><br><span class="line">axes[<span class="number">3</span>].fill_between(x, x**<span class="number">2</span>, x**<span class="number">3</span>, color=<span class="string">"green"</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">axes[<span class="number">3</span>].set_title(<span class="string">"fill_between"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795784141.png" alt="1547795784141"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制雷达图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">6</span>,<span class="number">6</span>))</span><br><span class="line">ax = fig.add_axes([<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">.6</span>, <span class="number">.6</span>], polar=<span class="literal">True</span>)</span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">ax.plot(t, t, color=<span class="string">'blue'</span>, lw=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795815795.png" alt="1547795815795"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制直方图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">n = np.random.randn(<span class="number">100000</span>)</span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">axes[<span class="number">0</span>].hist(n)</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">"Default histogram"</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_xlim((min(n), max(n)))</span><br><span class="line"></span><br><span class="line">axes[<span class="number">1</span>].hist(n, cumulative=<span class="literal">True</span>, bins=<span class="number">50</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">"Cumulative detailed histogram"</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_xlim((min(n), max(n)))</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795863968.png" alt="1547795863968"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成示例数据</span></span><br><span class="line">alpha = <span class="number">0.7</span></span><br><span class="line">phi_ext = <span class="number">2</span> * np.pi * <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flux_qubit_potential</span><span class="params">(phi_m, phi_p)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> + alpha - <span class="number">2</span> * np.cos(phi_p) * np.cos(phi_m) - alpha * np.cos(phi_ext - <span class="number">2</span>*phi_p)</span><br><span class="line"></span><br><span class="line">phi_m = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">100</span>)</span><br><span class="line">phi_p = np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, <span class="number">100</span>)</span><br><span class="line">X,Y = np.meshgrid(phi_p, phi_m)</span><br><span class="line">Z = flux_qubit_potential(X, Y).T</span><br><span class="line"></span><br><span class="line"><span class="string">"""绘制等高线图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line"></span><br><span class="line">cnt = ax.contour(Z, cmap=plt.cm.RdBu, vmin=abs(Z).min(), vmax=abs(Z).max(), extent=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795915187.png" alt="1547795915187"></p>
+<h3 id="2-5-3D-图形"><a href="#2-5-3D-图形" class="headerlink" title="2.5 3D 图形"></a>2.5 3D 图形</h3><p>使用 Matplotlib 绘制 3D 图形的过程中，我们首先需要导入 <code>Axes3D</code> 类，并通过 <code>projection=&#39;3d&#39;</code> 参数指定绘制 3D 图形。由于 3D 图形的绘制在机器学习中并不经常遇见，这里不做更多的介绍。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制 3D 表面图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d.axes3d <span class="keyword">import</span> Axes3D</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">14</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 projection='3d' 指定绘制 3D 图形</span></span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, projection=<span class="string">'3d'</span>)</span><br><span class="line">ax.plot_surface(X, Y, Z, rstride=<span class="number">4</span>, cstride=<span class="number">4</span>, linewidth=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547795963678.png" alt="1547795963678"></p>
+<p><font color="brown"><strong>Tips：</strong></font>当我们在桌面环境中绘制 3D 图形时，是可以通过鼠标任意拖动角度的，但在当前环境中不支持。</p>
+<p>下面再绘制一个漂亮且复杂一些的 3D 图形。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""绘制复杂一些的 3D 图</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>, projection=<span class="string">'3d'</span>)</span><br><span class="line"></span><br><span class="line">ax.plot_surface(X, Y, Z, rstride=<span class="number">4</span>, cstride=<span class="number">4</span>, alpha=<span class="number">0.25</span>)</span><br><span class="line">cset = ax.contour(X, Y, Z, zdir=<span class="string">'z'</span>, offset=-np.pi, cmap=plt.cm.coolwarm)</span><br><span class="line">cset = ax.contour(X, Y, Z, zdir=<span class="string">'x'</span>, offset=-np.pi, cmap=plt.cm.coolwarm)</span><br><span class="line">cset = ax.contour(X, Y, Z, zdir=<span class="string">'y'</span>, offset=<span class="number">3</span>*np.pi, cmap=plt.cm.coolwarm)</span><br><span class="line"></span><br><span class="line">ax.set_xlim3d(-np.pi, <span class="number">2</span>*np.pi)</span><br><span class="line">ax.set_ylim3d(<span class="number">0</span>, <span class="number">3</span>*np.pi)</span><br><span class="line">ax.set_zlim3d(-np.pi, <span class="number">2</span>*np.pi)</span><br></pre></td></tr></table></figure>
+<p><img src="images/1547796022339.png" alt="1547796022339"></p>
+<h2 id="3-实验总结"><a href="#3-实验总结" class="headerlink" title="3. 实验总结"></a><a id="3">3. 实验总结</a></h2><p>通过这节实验课程的学习，相信你已经初步掌握了使用 Matplotlib 绘图的方法和技巧。这些内容，在机器学习课程中已足够使用。当然，如果你对 Matplotlib 非常感兴趣，也可以通过实验楼其他课程学习 Matplotlib 的更多内容。本次实验涉及的知识点主要有：</p>
+<ul>
+<li>兼容 MATLAB 代码风格 API</li>
+<li>图名称、坐标轴名称、图例</li>
+<li>线型、颜色、透明度</li>
+<li>画布网格、坐标轴范围</li>
+<li>其他 2D 图形</li>
+<li>3D 图形</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/22/超快上手Jupyter-Notebook/" rel="next" title="超快上手Jupyter Notebook">
+                <i class="fa fa-chevron-left"></i> 超快上手Jupyter Notebook
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ziliu">
+            
+              <p class="site-author-name" itemprop="name">Ziliu</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hljwkwm" title="GitHub &rarr; https://github.com/hljwkwm" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/zi-qi-dan-liu/" title="知乎 &rarr; https://www.zhihu.com/people/zi-qi-dan-liu/" rel="noopener" target="_blank"><i class="fa fa-fw fa-link"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://172.96.215.110:81/" title="http://172.96.215.110:81/" rel="noopener" target="_blank">Shadowsocks Manager</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Matplotlib-绘制-2D-和-3D-图形"><span class="nav-number">1.</span> <span class="nav-text">使用 Matplotlib 绘制 2D 和 3D 图形</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验介绍"><span class="nav-number">1.1.</span> <span class="nav-text">实验介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验知识点"><span class="nav-number">1.1.1.</span> <span class="nav-text">实验知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境"><span class="nav-number">1.1.2.</span> <span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引目录"><span class="nav-number">1.1.3.</span> <span class="nav-text">索引目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-兼容-MATLAB-代码风格-API"><span class="nav-number">1.2.</span> <span class="nav-text">1. 兼容 MATLAB 代码风格 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Matplotlib-面向对象-API（推荐）"><span class="nav-number">1.3.</span> <span class="nav-text">2. Matplotlib 面向对象 API（推荐）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-图名称、坐标轴名称、图例"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 图名称、坐标轴名称、图例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-线型、颜色、透明度"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 线型、颜色、透明度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-画布网格、坐标轴范围"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 画布网格、坐标轴范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-其他-2D-图形"><span class="nav-number">1.3.4.</span> <span class="nav-text">2.4 其他 2D 图形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3D-图形"><span class="nav-number">1.3.5.</span> <span class="nav-text">2.5 3D 图形</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实验总结"><span class="nav-number">1.4.</span> <span class="nav-text">3. 实验总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ziliu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"enable":true,"scale":1,"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":140,"height":300,"position":"right","hOffset":50,"vOffset":20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/click.js"></script>
