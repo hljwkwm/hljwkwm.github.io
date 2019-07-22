@@ -101,7 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="Crazy丿紫流">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-21T05:16:04.010Z">
+<meta property="og:updated_time" content="2019-05-21T05:16:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文章标签">
 
@@ -394,6 +394,13 @@
           
 
   
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
 
 
 
@@ -663,6 +670,40 @@
 
   
 
+
+  
+    <!-- LOCAL: You can save these files to your site and update links -->
+
+  
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
+<!-- END LOCAL -->
+
+<script>
+  function renderGitment() {
+    var gitment = new Gitmint({
+      id: window.location.pathname,
+      owner: 'hljwkwm',
+      repo: 'hljwkwm.github.io',
+      
+        lang: '' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+      
+      oauth: {
+      
+      
+        client_secret: 'c6b571d08d2a960e2f1dae032f771dfadc64c031',
+      
+        client_id: 'fa3e8c1beef6c3c48dde'
+      }
+    });
+    gitment.render('gitment-container');
+  }
+
+  
+    renderGitment();
+  
+</script>
 
   
 
