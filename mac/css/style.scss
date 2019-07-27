@@ -1,0 +1,110 @@
+.contents{
+    width: 1200px;
+    height: 680px;
+    margin: 0 auto;
+    position: relative;
+    background: #000000;
+    border-radius: 10px;
+    padding: 27px 0 50px 70px;
+    .logo{
+        display: block;
+        width: 200px;
+    }
+    select{
+        overflow: hidden;
+        width: 234px;
+        height: 30px;
+        background: none;
+        border: 1px solid #7C7C7C;
+        outline: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        background: #000;
+        color: #fff;
+        option{color: #fff;}
+    }
+    .g{
+        margin-left: -20px;
+    }
+    .mids{
+        width: 100%;
+        .fl{
+            overflow: hidden;
+            width: 70px;
+            li{
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+                div{
+                    overflow: hidden;
+                    width: 22px;
+                    background: #fff;
+                    height: 22px;
+                    border-radius: 50%;
+                }
+                p{
+                    width: 20px;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #fff;
+                    line-height: 22px;
+                }
+            }
+        }
+        
+        .fr{
+            width: 1000px;
+            .item{
+                padding-left: 20px;
+                width: 25%;
+                float: left;
+                p{
+                    font-size: 22px;
+                    color: #fff;
+                }
+                ul{
+                    li{
+                        width: 184px;
+                        cursor: pointer;
+                        height: 30px;
+                         position: relative;
+                        border-radius: 6px;
+                        margin-top: 10px;
+                        &:hover div{
+                            display: block;
+                            transition: all .3s;
+                        }                        
+                        div{
+                            overflow: hidden;
+                            padding: 5px 0;
+                            background: #fff;
+                            width: 200px;
+                            display: none;
+                            position: absolute;
+                            right: -120px;
+                            z-index: 99999;
+                            top: 30px;
+                            border-radius: 6px;
+                            em{
+                                display: block;
+                                text-align: center;
+                                font-size: 12px;
+                                line-height: 30px;
+                                font-style: normal;
+                            }
+                            span{
+                                display: block;
+                                text-align: center;
+                                font-size: 13px;
+                                line-height: 30px;
+                                font-style: normal;
+                            }
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+}

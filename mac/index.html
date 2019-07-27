@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>MAC口红色系</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link href="css/public.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body style="width: 100%;height: 100vh;display: flex;align-items: center;justify-content: center;background: #dcdcdc;">
+		<div id="app">
+			<div class="contents">
+				<img src="images/MAC LOGO.png" class="logo" />
+				<select onchange="show_sub(this.value)">
+					<option value="-1">选择你的肤色</option>
+					<option :value="index" :data-color = "item.color" v-for="(item,index) in list1">{{index + 1}}号肤色</option>
+				</select>
+				<div class="mids">
+					<ul class="fl">
+						<li v-for="(item,index) in list">
+							<div :style="{background: item}"></div>
+							<p>{{index + 1}}</p>
+						</li>
+					</ul>
+					<div class="fr">
+						<div class="item" v-for="(item,index) in color">
+							<p>{{item.title}}</p>
+							<ul>
+								<li v-for="items in item.arr" >
+									<img :class="{ g: items.flag}" :src="items.src" :style="{width:items.width}">
+									<div>
+										<em :style="{color: items.colors}">{{items.font}}</em>
+										<span v-if="items.x != 0">销量排名:{{items.x}}</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--[if !IE]><!-->
+		<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+		<!-- <![endif]-->
+
+		<!--[if lte IE 8]>
+        <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <![endif]-->
+
+		<!--[if gt IE 8]>
+        <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <![endif]-->
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script>
+			function show_sub(e){
+				var gg = app.list[e]
+				if(e == -1){
+					$('.contents').css('background','black')
+				}
+				if(gg == '#FAF0E6' || gg == '#F4E8D8' || gg == '#FFF6ED'){
+					$('.contents .mids .fr .item p').css('color','#333')
+					$('.contents .mids .fl li p').css('color','#333')
+				}else{
+					$('.contents .mids .fr .item p').css('color','#fff')
+					$('.contents .mids .fl li p').css('color','#fff')
+				}
+				console.log(e)
+				$('.contents').css('background',gg)
+			}
+			var app = new Vue({
+				el: '#app',
+				methods:{
+					
+				},
+				data: {
+					list: ['#FFF6ED', '#FAF0E6', '#F4E8D8', '#F3E0CF', '#EDDBC3', '#EAD7B9', '#E9D0B2', '#E6C9A9', '#E6C49E', '#DBB993', '#D2B08A', '#C8A680', '#BE9C76', '#B69369', '#AE8B61', '#A9835A'],
+					list1: [{
+						'title':'一',
+						'color':'#FFF6ED'
+					},{
+						'title':'二',
+						'color':'#FAF0E6'
+					},{
+						'title':'三',
+						'color':'#F4E8D8'
+					},{
+						'title':'四',
+						'color':'#F3E0CF'
+					},{
+						'title':'五',
+						'color':'#EDDBC3'
+					},{
+						'title':'六',
+						'color':'#EAD7B9'
+					},{
+						'title':'七',
+						'color':'#E9D0B2'
+					},{
+						'title':'八',
+						'color':'#E6C9A9'
+					},{
+						'title':'九',
+						'color':'#E6C49E'
+					},{
+						'title':'十',
+						'color':'#DBB993'
+					},{
+						'title':'十一',
+						'color':'#D2B08A'
+					},{
+						'title':'十二',
+						'color':'#C8A680'
+					},{
+						'title':'十三',
+						'color':'#BE9C76'
+					},{
+						'title':'十四',
+						'color':'#B69369'
+					},{
+						'title':'十五',
+						'color':'#AE8B61'
+					},{
+						'title':'十六',
+						'color':'#A9835A'
+					}],
+					color: [{
+						title: '红色系',
+						arr: [{
+							'colors': '#A02E2B',
+							'font': 'CHILI火热小辣椒',
+							'x': 1,
+							'src':'images/1.png',
+							'width':'185px',
+							'flag':true
+						}, {
+							'colors': '#A52517',
+							'font': 'DIVA复古酒红色',
+							'x': 0,
+							'src':'images/2.png',
+							'width':'97px'
+						}, {
+							'colors': '#A93876',
+							'font': 'FLAT OUT FABULOUS哑光玫红',
+							'x': 0,
+							'src':'images/3.png',
+							'width':'53px'
+						}, {
+							'colors': '#C23448',
+							'font': 'LADY BUG番茄红',
+							'x': 0,
+							'src':'images/4.png',
+							'width':'100px'
+						}, {
+							'colors': '#B20E0D',
+							'font': 'RUSSIAN RED俄罗斯红',
+							'x': 0,
+							'src':'images/5.png',
+							'width':'116px'
+						}, {
+							'colors': '#A52517',
+							'font': 'DARE YOU深宝石红',
+							'x': 2,
+							'src':'images/6.png',
+							'width':'150px',
+							'flag':true
+						}, {
+							'colors': '#D70C1D',
+							'font': 'M-A-C RED魅可正红',
+							'x': 0,
+							'src':'images/7.png',
+							'width':'126px'
+						}, {
+							'colors': '#67242F',
+							'font': 'SIN复古姨妈色',
+							'x': 0,
+							'src':'images/8.png',
+							'width':'38px'
+						}, {
+							'colors': '#B63239',
+							'font': 'BUDY WOO复古哑光正红',
+							'x': 3,
+							'src':'images/9.png',
+							'width':'110px',
+							'flag':true
+						}, {
+							'colors': '#CF2335',
+							'font': 'ALL FIRED UP哑光深玫红',
+							'x': 0,
+							'src':'images/10.png',
+							'width':'75px'
+						}, {
+							'colors': '#CA172D',
+							'font': 'BREVE RED红玫瑰红色',
+							'x': 0,
+							'src':'images/11.png',
+							'width':'114px'
+						}, {
+							'colors': '#812113',
+							'font': 'D FOR DANGER限量哑光浆果',
+							'x': 0,
+							'src':'images/12.png',
+							'width':'40px'
+						}]
+					},{
+						title: '粉色系',
+						arr: [{
+							'colors': '#DA2D61',
+							'font': 'LUSTERING木瓜红',
+							'x': 0,
+							'src':'images/13.png',
+							'width':'67px'
+						}, {
+							'colors': '#E93F65',
+							'font': 'IMPASSIONED西瓜粉红',
+							'x': 2,
+							'src':'images/14.png',
+							'width':'137px',
+							'flag':true
+						}, {
+							'colors': '#D75F71',
+							'font': 'PLEASE ME蔷薇粉色',
+							'x': 0,
+							'src':'images/15.png',
+							'width':'96px'
+						}, {
+							'colors': '#D75F71',
+							'font': 'SEE SHEER西柚浅橘粉',
+							'x': 1,
+							'src':'images/16.png',
+							'width':'185px',
+							'flag':true
+						}, {
+							'colors': '#F7586C',
+							'font': 'SUNNY SEOUL暖粉色',
+							'x': 0,
+							'src':'images/17.png',
+							'width':'110px'
+						}, {
+							'colors': '#FA39A1',
+							'font': 'CANDY YYUM-YUM荧光亮粉想你色',
+							'x': 0,
+							'src':'images/18.png',
+							'width':'37px'
+						}, {
+							'colors': '#DE2C80',
+							'font': 'BE SILLY明艳魅粉',
+							'x': 0,
+							'src':'images/19.png',
+							'width':'65px'
+						}, {
+							'colors': '#ED8FAA',
+							'font': 'LOVELORN情感粉色',
+							'x': 0,
+							'src':'images/20.png',
+							'width':'78px'
+						}, {
+							'colors': '#F66B93',
+							'font': 'PINK PEAL POP泡泡糖闪粉',
+							'x': 0,
+							'src':'images/21.png',
+							'width':'108px'
+						}, {
+							'colors': '#E85D9A',
+							'font': 'SILLY哑光芭比',
+							'x': 0,
+							'src':'images/22.png',
+							'width':'50px'
+						}, {
+							'colors': '#EC6182',
+							'font': 'STEADY GOING哑光甜心芭比',
+							'x': 3,
+							'src':'images/23.png',
+							'width':'130px'
+						}, {
+							'colors': '#DD7188',
+							'font': 'SWEET EXPERIENCET甜蜜经历',
+							'x': 0,
+							'src':'images/24.png',
+							'width':'80px'
+						}]
+					},{
+						title: '裸色系',
+						arr: [{
+							'colors': '#C5776D',
+							'font': 'SHANGHAI SPICE中性粉红色',
+							'x': 3,
+							'src':'images/25.png',
+							'width':'70px'
+						}, {
+							'colors': '#E3A08F',
+							'font': 'MATH裸粉色',
+							'x': 2,
+							'src':'images/26.png',
+							'width':'94px'
+						}, {
+							'colors': '#DD6B6E',
+							'font': 'RUNWAY HIT哑光裸橘',
+							'x': 1,
+							'src':'images/27.png',
+							'width':'135px'
+						}]
+					},{
+						title: '珊瑚色系',
+						arr: [{
+							'colors': '#EB7B75',
+							'font': 'CORAL BLISS浅珊瑚色',
+							'x': 3,
+							'src':'images/28.png',
+							'width':'69px'
+						}, {
+							'colors': '#E50103',
+							'font': 'CORAL BLISS浅珊瑚色',
+							'x': 1,
+							'src':'images/29.png',
+							'width':'185px',
+							'flag':true
+						}, {
+							'colors': '#F63627',
+							'font': 'MORANGE奶油亮橘',
+							'x': 2,
+							'src':'images/30.png',
+							'width':'151px'
+						}, {
+							'colors': '#EB5964',
+							'font': 'REEL SEXY明亮珊瑚色',
+							'x': 0,
+							'src':'images/31.png',
+							'width':'90px'
+						}, {
+							'colors': '#F6615B',
+							'font': 'VEGAS VOLT珊瑚橘色',
+							'x': 0,
+							'src':'images/32.png',
+							'width':'130px'
+						}, {
+							'colors': '#E9563C',
+							'font': 'SHSHI KISS寿司之吻',
+							'x': 0,
+							'src':'images/33.png',
+							'width':'85px'
+						}]
+					}]
+				}
+			})
+		</script>
+	</body>
+
+</html>

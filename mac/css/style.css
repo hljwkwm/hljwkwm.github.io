@@ -1,0 +1,93 @@
+.contents {
+  width: 1200px;
+  height: 680px;
+  margin: 0 auto;
+  position: relative;
+  background: #000000;
+  border-radius: 10px;
+  padding: 27px 0 50px 70px; }
+  .contents .logo {
+    display: block;
+    width: 200px; }
+  .contents select {
+    overflow: hidden;
+    width: 234px;
+    height: 30px;
+    background: none;
+    border: 1px solid #7C7C7C;
+    outline: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    background: #000;
+    color: #fff; }
+    .contents select option {
+      color: #fff; }
+  .contents .g {
+    margin-left: -20px; }
+  .contents .mids {
+    width: 100%; }
+    .contents .mids .fl {
+      overflow: hidden;
+      width: 70px; }
+      .contents .mids .fl li {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px; }
+        .contents .mids .fl li div {
+          overflow: hidden;
+          width: 22px;
+          background: #fff;
+          height: 22px;
+          border-radius: 50%; }
+        .contents .mids .fl li p {
+          width: 20px;
+          text-align: center;
+          font-size: 12px;
+          color: #fff;
+          line-height: 22px; }
+    .contents .mids .fr {
+      width: 1000px; }
+      .contents .mids .fr .item {
+        padding-left: 20px;
+        width: 25%;
+        float: left; }
+        .contents .mids .fr .item p {
+          font-size: 22px;
+          color: #fff; }
+        .contents .mids .fr .item ul li {
+          width: 184px;
+          cursor: pointer;
+          height: 30px;
+          position: relative;
+          border-radius: 6px;
+          margin-top: 10px; }
+          .contents .mids .fr .item ul li:hover div {
+            display: block;
+            transition: all .3s; }
+          .contents .mids .fr .item ul li div {
+            overflow: hidden;
+            padding: 5px 0;
+            background: #fff;
+            width: 200px;
+            display: none;
+            position: absolute;
+            right: -120px;
+            z-index: 99999;
+            top: 30px;
+            border-radius: 6px; }
+            .contents .mids .fr .item ul li div em {
+              display: block;
+              text-align: center;
+              font-size: 12px;
+              line-height: 30px;
+              font-style: normal; }
+            .contents .mids .fr .item ul li div span {
+              display: block;
+              text-align: center;
+              font-size: 13px;
+              line-height: 30px;
+              font-style: normal; }
+
+/*# sourceMappingURL=style.css.map */
